@@ -36,25 +36,7 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
-
-        Schema::create('properties', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->text('address');
-            $table->decimal('buyPrice', 15, 2);
-            $table->decimal('rentPrice', 15, 2);
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
-        });
     
-        Schema::create('transactions', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('property_id')->constrained('properties')->onDelete('cascade');
-            $table->decimal('totalPrice', 15, 2);
-            $table->timestamps();
-        });
     }
 
     /**
