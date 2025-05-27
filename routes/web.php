@@ -20,13 +20,23 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(Admin::class)->group(function () {
     
     Route::prefix('admin')->group(function () {
-        Route::get('/dashboard', function() {
+        
+            Route::get('/dashboard', function() {
             return view('admin.dashboard');
             })->name("admin.dashboard");
-        });
-    
+            
+            Route::get('/imoveisCrud', function() {
+                return view('admin.imoveisCrud');
+            })->name("admin.imoveisCrud");
+        
+            Route::get('/usuariosCrud', function() {
+            return view('admin.usuariosCrud');
+            })->name("admin.usuariosCrud");
+
     });
     
+});
+   
     Route::middleware(Customer::class)->group(function () {
     
             Route::get('/perfil', function() {

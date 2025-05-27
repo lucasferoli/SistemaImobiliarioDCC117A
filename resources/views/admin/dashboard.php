@@ -8,23 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Imobiliária Admin</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link active" href="#">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Imóveis</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Clientes</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Usuários</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Sair</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+
+<?php include resource_path('views/admin/modals/header.php'); ?>
 
 <div class="container my-5">
     <h1 class="mb-4">Painel Administrativo</h1>
