@@ -3,25 +3,35 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
+use App\Http\Middleware\Admin;
+use App\Http\Middleware\User;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('admin')->group(function () {
-    
-    Route::middleware(['auth', 'role:admin'])->group(function () {
-        Route::get('/dashboard', function() {
-            return view('admin.dashboard');
-        })->name("dashboard");
-    });
 
-});
-
-Route::middleware(['auth', 'role:user'])->group(function () {
-    Route::get('/perfil', [UserController::class, 'perfil']);
-});
-
-
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+
+Route::middleware(Admin::class)->group(function () {
+    
+    Route::prefix('admin')->group(function () {
+        Route::get('/dashboard', function() {
+            return view('admin.dashboard');
+            })->name("admin.dashboard");
+        });
+    
+    });
+    
+    Route::middleware(Customer::class)->group(function () {
+    
+            Route::get('/perfil', function() {
+                return view('perfil');
+            })->name("perfil");
+    });
+    
+    

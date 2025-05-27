@@ -8,39 +8,28 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function showLoginForm()
+    public function index()
     {
         return view('login');
     }
 
-    public function login(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+public function login(Request $request)
+{
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required'],
+    ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            // Checa role do usuario
-            $user = Auth::user();
-            if ($user->role === 'admin') {
-                return redirect('/dashboard');
-            } elseif ($user->role === 'user') {
-                return redirect('/perfil');
-            } else {
-                Auth::logout();
-                return back()->withErrors([
-                    'email' => 'Tipo de usuário desconhecido.',
-                ])->onlyInput('email');
-            }
-        }
-
-        return back()->withErrors([
-            'email' => 'As credenciais não correspondem aos nossos registros.',
-        ])->onlyInput('email');
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+        return redirect()->intended('/'); // Redireciona para a rota protegida pelo middleware
     }
+
+    return back()->withErrors([
+        'email' => 'As credenciais não correspondem aos nossos registros.',
+    ])->onlyInput('email');
+}
+
 
 
     public function logout(Request $request)
