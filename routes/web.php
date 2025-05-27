@@ -7,8 +7,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'index']);
+Route::prefix('admin')->group(function () {
+    
+    Route::middleware(['auth', 'role:admin'])->group(function () {
+        Route::get('/dashboard', function() {
+            return view('admin.dashboard');
+        })->name("dashboard");
+    });
+
 });
 
 Route::middleware(['auth', 'role:user'])->group(function () {
