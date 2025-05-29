@@ -21,38 +21,25 @@
                 <th>ID</th>
                 <th>Título</th>
                 <th>Endereço</th>
-                <th>Tipo</th>
                 <th>Preço</th>
-                <th>Status</th>
                 <th>Ações</th>
             </tr>
         </thead>
+
         <tbody>
+
+            @foreach($properties as $property) 
             <tr>
-                <td>1</td>
-                <td>Apartamento Central</td>
-                <td>Rua das Flores, 123</td>
-                <td>Apartamento</td>
-                <td>R$ 350.000</td>
-                <td>Disponível</td>
+                <td>{{$property->id}}</td>
+                <td>{{$property->title}}</td>
+                <td>{{$property->address}}</td>
+                <td>{{$property->buyPrice}}</td>
                 <td>
                     <a href="#" class="btn btn-primary btn-sm">Editar</a>
                     <a href="#" class="btn btn-danger btn-sm">Excluir</a>
                 </td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Casa com Piscina</td>
-                <td>Av. Brasil, 456</td>
-                <td>Casa</td>
-                <td>R$ 750.000</td>
-                <td>Vendido</td>
-                <td>
-                    <a href="#" class="btn btn-primary btn-sm">Editar</a>
-                    <a href="#" class="btn btn-danger btn-sm">Excluir</a>
-                </td>
-            </tr>
-            <!-- Adicione mais imóveis conforme necessário -->
+            @endforeach
         </tbody>
     </table>
 </div>

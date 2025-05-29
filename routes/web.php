@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PropertyController;
+
 
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\User;
@@ -25,10 +27,7 @@ Route::middleware(Admin::class)->group(function () {
             return view('admin.dashboard');
             })->name("admin.dashboard");
             
-            Route::get('/imoveisCrud', function() {
-                return view('admin.imoveisCrud');
-            })->name("admin.imoveisCrud");
-        
+            Route::get('/imoveisCrud', [PropertyController::class, 'index'])->name('admin.imoveisCrud');
             Route::get('/usuariosCrud', function() {
             return view('admin.usuariosCrud');
             })->name("admin.usuariosCrud");
