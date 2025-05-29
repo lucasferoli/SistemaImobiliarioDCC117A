@@ -13,7 +13,7 @@
 <div class="container my-5">
     <h1 class="mb-4">Gerenciamento de Imóveis</h1>
     <div class="mb-3">
-        <a href="#" class="btn btn-success">Adicionar Novo Imóvel</a>
+        <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNovoImovel">Adicionar Novo Imóvel</a>
     </div>
     <table class="table table-striped">
         <thead>
@@ -56,6 +56,16 @@
         </tbody>
     </table>
 </div>
+
+<!-- Modal Novo Imóvel -->
+<?php include resource_path('views/admin/modals/propriedades/criar.php'); ?>
+
+<!-- Editar Imóvel -->
+<?php include resource_path('views/admin/modals/propriedades/criar.php'); ?>
+
+<!-- Excluir -->
+<?php include resource_path('views/admin/modals/propriedades/criar.php'); ?>
+
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
