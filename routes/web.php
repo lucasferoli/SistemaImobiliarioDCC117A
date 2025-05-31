@@ -27,20 +27,23 @@ Route::middleware(Admin::class)->group(function () {
             return view('admin.dashboard');
             })->name("admin.dashboard");
             
+
             Route::get('/imoveisCrud', [PropertyController::class, 'index'])->name('admin.imoveisCrud');
             Route::get('/usuariosCrud', function() {
             return view('admin.usuariosCrud');
             })->name("admin.usuariosCrud");
 
-    });
+            Route::put('/imoveisCrud/{property}', [PropertyController::class, 'update'])->name('properties.update');
+            Route::delete('/imoveisCrud/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
+
     
+    });
+
 });
-   
-    Route::middleware(Customer::class)->group(function () {
-    
-            Route::get('/perfil', function() {
-                return view('perfil');
-            })->name("perfil");
-    });
-    
-    
+
+
+Route::middleware(User::class)->group(function () {
+    Route::get('/perfil', function() {
+        return view('perfil');
+    })->name("perfil");
+});

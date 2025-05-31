@@ -13,4 +13,22 @@ class PropertyController extends Controller
         $properties = Property::all();
         return view('admin/imoveisCrud', compact('properties'));
     }
-}
+
+        public function update(Property $property, Request $request)
+        {
+
+            $data = $request->all();
+            
+            $property->update($data);
+
+            return redirect()->route('admin.imoveisCrud');
+        }
+
+
+        public function destroy(Property $property)
+        {
+            $property->delete();
+
+            return redirect()->route('admin.imoveisCrud');
+        }
+    }
