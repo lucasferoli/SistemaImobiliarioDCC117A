@@ -33,6 +33,7 @@ Route::middleware(Admin::class)->group(function () {
             return view('admin.usuariosCrud');
             })->name("admin.usuariosCrud");
 
+            Route::post('/imoveisCrud/create', [PropertyController::class, 'store'])->name('properties.store');
             Route::put('/imoveisCrud/{property}', [PropertyController::class, 'update'])->name('properties.update');
             Route::delete('/imoveisCrud/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
 
