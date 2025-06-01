@@ -14,7 +14,7 @@ class UserController extends Controller
         return view('admin.usuariosCrud', compact('users'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
         User::create([
             'name' =>$request->name,
