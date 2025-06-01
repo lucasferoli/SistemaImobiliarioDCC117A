@@ -33,6 +33,7 @@
                 <td>{{$property->address}}</td>
                 <td>{{$property->buyPrice}}</td>
                 <td>
+                    <a href="{{ route('properties.show', $property->id) }}" class="btn btn-info btn-sm" target="_blank">Ver</a>
                     <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditarImovel{{$property->id}}">Editar</a>
                     <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalExcluirImovel{{$property->id}}">Excluir</a>
                 </td>
