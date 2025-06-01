@@ -69,42 +69,26 @@
     <main class="container mb-5">
         <h2 class="mb-4 text-primary">Destaques</h2>
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <!-- Exemplo de imóvel -->
+            @foreach($properties as $property)
             <div class="col">
                 <div class="card h-100">
-                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Casa moderna">
+                    @if(isset($property->image) && filter_var($property->image, FILTER_VALIDATE_URL))
+                        <img src="{{ $property->image }}" class="card-img-top" alt="Imagem do Imóvel">
+                    @else
+                        <img src="{{ $property->imagem_url ?? 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80' }}" class="card-img-top" alt="{{ $property->titulo ?? 'Imóvel' }}">
+                    @endif
                     <div class="card-body">
-                        <h5 class="card-title">Casa Moderna</h5>
-                        <p class="card-text">3 quartos • 2 banheiros • 120m²<br>R$ 450.000</p>
-                        <a href="#" class="btn btn-primary">Ver detalhes</a>
+                        <h5 class="card-title">{{ $property->title }}</h5>
+                        <p class="card-text mb-1"><strong>Endereço:</strong> {{ $property->address }}</p>
+                        <p class="card-text mb-1"><strong>Preço de Compra:</strong> R$ {{ number_format($property->buyPrice, 2, ',', '.') }}</p>
+                        <p class="card-text mb-3"><strong>Preço de Aluguel:</strong> R$ {{ number_format($property->rentPrice, 2, ',', '.') }}</p>
+                        <a href="{{ route('properties.show', $property->id) }}" class="btn btn-primary">Ver detalhes</a>
                     </div>
                 </div>
             </div>
-            <!-- Exemplo de imóvel -->
-            <div class="col">
-                <div class="card h-100">
-                    <img src="https://images.unsplash.com/photo-1460518451285-97b6aa326961?auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Apartamento">
-                    <div class="card-body">
-                        <h5 class="card-title">Apartamento no Centro</h5>
-                        <p class="card-text">2 quartos • 1 banheiro • 80m²<br>R$ 1.500/mês</p>
-                        <a href="#" class="btn btn-primary">Ver detalhes</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Exemplo de imóvel -->
-            <div class="col">
-                <div class="card h-100">
-                    <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Sala comercial">
-                    <div class="card-body">
-                        <h5 class="card-title">Sala Comercial</h5>
-                        <p class="card-text">50m² • Centro Empresarial<br>R$ 2.000/mês</p>
-                        <a href="#" class="btn btn-primary">Ver detalhes</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Adicione mais imóveis conforme necessário -->
-        </div>
+            @endforeach
 
+        </div>
         <div class="text-center mt-5">
             <a href="#" class="btn btn-outline-primary btn-lg">Ver todos os imóveis</a>
         </div>
