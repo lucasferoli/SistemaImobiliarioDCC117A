@@ -21,11 +21,12 @@ class PropertyFactory extends Factory
             'title' => fake()->company(),
             'description' => fake()->text(),
             'address' => fake()->unique()->address(),
+            'image' => 'https://picsum.photos/id/' . fake()->unique()->numberBetween(1, 1000) . '/600/400',
             'buyPrice' => fake()->numberBetween(100000, 1000000),
             'rentPrice' => fake()->numberBetween(1000, 10000),
             'user_id' => User::inRandomOrder()->first()?->id,
             'created_at' => now(),
             'updated_at' => now(),
-    ];
+        ];
     }
 }
