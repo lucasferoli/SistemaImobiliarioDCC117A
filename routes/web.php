@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PropertyController;
-
+use App\Http\Controllers\UserController;
 
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\User;
@@ -29,15 +29,16 @@ Route::middleware(Admin::class)->group(function () {
             
 
             Route::get('/imoveisCrud', [PropertyController::class, 'index'])->name('admin.imoveisCrud');
-            Route::get('/usuariosCrud', function() {
-            return view('admin.usuariosCrud');
-            })->name("admin.usuariosCrud");
-
             Route::post('/imoveisCrud/create', [PropertyController::class, 'store'])->name('properties.store');
             Route::put('/imoveisCrud/{property}', [PropertyController::class, 'update'])->name('properties.update');
             Route::delete('/imoveisCrud/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
 
     
+            Route::get('/usuariosCrud', [UserController::class, 'index'])->name('admin.usuariosCrud');
+            Route::post('/usuariosCrud/create', [UserController::class, 'store'])->name('users.store');
+            Route::put('/usuariosCrud/{user}', [UserController::class, 'update'])->name('users.update');
+            Route::delete('/usuariosCrud/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
     });
 
 });
