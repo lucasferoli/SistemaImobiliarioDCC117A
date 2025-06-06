@@ -24,6 +24,8 @@ Route::get('postIndividual/{id}', [IndividualController::class, 'index'])->name(
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('/profile');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::middleware(Admin::class)->group(function () {
