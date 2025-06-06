@@ -15,7 +15,7 @@
     <div class="col-md-6">
       <div class="card shadow">
         <div class="card-body text-center">
-          <img src="{{ asset('assets/profileImage.png') }}" alt="Foto Do Usuario" style="height:112px;vertical-align:middle;">
+          <img src="{{ asset(Auth::user()->image) }}" alt="Foto Do Usuario" style="height:112px;vertical-align:middle;">
           <h3 class="card-title mb-1">{{ Auth::user()->name }}</h3>
           <p class="text-muted mb-3">{{ Auth::user()->email }}</p>
           <hr>
@@ -59,7 +59,7 @@
             <div id="changePasswordFields" style="display:none;">
           <div class="mb-3">
             <label for="current_password" class="form-label">Senha atual</label>
-            <input type="password" class="form-control" id="current_password" name="current_password">
+            <input type="password" class="form-control" id="current_password" name="current_password"  >
           </div>
           <div class="mb-3">
             <label for="new_password" class="form-label">Nova senha</label>
