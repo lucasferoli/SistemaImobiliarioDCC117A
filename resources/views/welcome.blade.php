@@ -28,12 +28,12 @@
                                 </li>
                             @endif
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ Auth::user()->name }}
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                                     <li>
-                                        <a class="dropdown-item">Ver seu Perfil</a>
+                                        <a class="dropdown-item" href="{{ url('/profile') }}">Ver seu Perfil</a>
                                     </li>
                                     <li>
                                         <form method="POST" action="{{ route('logout') }}">

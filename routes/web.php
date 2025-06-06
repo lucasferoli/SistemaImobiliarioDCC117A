@@ -7,6 +7,7 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\IndividualController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\ProfileController;
 
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\User;
@@ -21,33 +22,24 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/', [LandingController::class, 'index'])->name('/');
 Route::get('postIndividual/{id}', [IndividualController::class, 'index'])->name('properties.show');
 
-Route::middleware(Admin::class)->group(function () {
-    
-    Route::prefix('admin')->group(function () {
-        
-            Route::get('/dashboard', function() {
-            return view('admin.dashboard');
-            })->name("admin.dashboard");
-            
-
-            Route::get('/imoveisCrud', [PropertyController::class, 'index'])->name('admin.imoveisCrud');
-            Route::post('/imoveisCrud/create', [PropertyController::class, 'store'])->name('properties.store');
-            Route::put('/imoveisCrud/{property}', [PropertyController::class, 'update'])->name('properties.update');
-            Route::delete('/imoveisCrud/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
-
-    
-            Route::get('/usuariosCrud', [UserController::class, 'index'])->name('admin.usuariosCrud');
-            Route::post('/usuariosCrud/create', [UserController::class, 'store'])->name('users.store');
-            Route::put('/usuariosCrud/{user}', [UserController::class, 'update'])->name('users.update');
-            Route::delete('/usuariosCrud/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-
-    });
-
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('/profile');
 });
 
+Route::middleware(Admin::class)->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('admin.dashboard');
 
-Route::middleware(User::class)->group(function () {
-    Route::get('/perfil', function() {
-        return view('perfil');
-    })->name("perfil");
+        Route::get('/imoveisCrud', [PropertyController::class, 'index'])->name('admin.imoveisCrud');
+        Route::post('/imoveisCrud/create', [PropertyController::class, 'store'])->name('properties.store');
+        Route::put('/imoveisCrud/{property}', [PropertyController::class, 'update'])->name('properties.update');
+        Route::delete('/imoveisCrud/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
+
+        Route::get('/usuariosCrud', [UserController::class, 'index'])->name('admin.usuariosCrud');
+        Route::post('/usuariosCrud/create', [UserController::class, 'store'])->name('users.store');
+        Route::put('/usuariosCrud/{user}', [UserController::class, 'update'])->name('users.update');
+        Route::delete('/usuariosCrud/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    });
 });
