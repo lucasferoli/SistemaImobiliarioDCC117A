@@ -8,61 +8,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand" href="#">Imobiliária DCC117A</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    @if (Route::has('login'))
-                        @auth
-                            @if (Auth::user()->role == 'admin')
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('/admin/dashboard') }}">Dashboard</a>
-                                </li>
-                            @else
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('/dashboard') }}">Dashboard</a>
-                                </li>
-                            @endif
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ Auth::user()->name }}
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                                    <li>
-                                        <a class="dropdown-item" href="{{ url('/profile') }}">Ver seu Perfil</a>
-                                    </li>
-                                    <li>
-                                        <form method="POST" action="{{ route('logout') }}">
-                                            @csrf
-                                            <button type="submit" class="dropdown-item">Logout</button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">Entrar</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">Registrar</a>
-                                </li>
-                            @endif
-                        @endauth
-                    @endif
-                </ul>
-            </div>
-        </div>
-    </nav>
+
+    @include('modais.navbar')
 
     <header class="bg-white py-5 shadow-sm mb-4">
         <div class="container text-center">
             <h1 class="display-4 fw-bold">Bem-vindo à sua nova casa!</h1>
-            <p class="lead">Encontre os melhores imóveis para alugar ou comprar. Casas, apartamentos, salas comerciais e muito mais!</p>
+            <p class="lead">
+                Encontre os melhores imóveis para alugar ou comprar. Casas, apartamentos, salas comerciais e muito mais!
+            </p>
         </div>
     </header>
 
