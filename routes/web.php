@@ -29,6 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('/dashboardUser');
+    Route::post('/dashboard/create', [UserDashboardController::class, 'store'])->name('dashboard.store');
+    Route::put('/dashboard/{property}', [UserDashboardController::class, 'update'])->name('dashboard.update');
+    Route::delete('/dashboard/{property}', [UserDashboardController::class, 'destroy'])->name('dashboard.destroy');
 });
 
 Route::middleware(Admin::class)->group(function () {

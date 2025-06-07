@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Painel do Usuário - Imóveis & Transações</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body class="bg-light">
 
@@ -24,8 +26,10 @@
                             <div class="card h-100">
                                 <img src="https://via.placeholder.com/350x200?text=Casa+1" class="card-img-top" alt="Casa 1">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{$property->title}}</h5>
-                                    <p class="card-text"><br>Localização: {{$property->address}}</p>
+                                    <h5 class="card-title">{{ $property->title }}</h5>
+                                    <p class="card-text">
+                                        <br>Localização: {{ $property->address }}
+                                    </p>
                                     <span class="badge bg-success">À Venda</span>
                                 </div>
                                 <div class="card-footer d-flex justify-content-between align-items-center">
@@ -33,26 +37,93 @@
                                         Anunciado em: {{ $property->created_at->format('d/m/Y') }}
                                     </small>
                                     <div>
-                                        <a href="" class="btn btn-sm btn-outline-primary me-1" title="Editar">
+                                        <!-- Edit Button -->
+                                        <button type="button" class="btn btn-sm btn-outline-primary me-1" title="Editar" data-bs-toggle="modal" data-bs-target="#modalEditarImovel{{$property->id}}">
                                             <i class="bi bi-pencil"></i>
-                                        </a>
-                                        <form action="" method="POST" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Excluir" onclick="return confirm('Tem certeza que deseja excluir este imóvel?')">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
+                                        </button>
+                                        <!-- Delete Button -->
+                                        <button type="button" class="btn btn-sm btn-outline-danger" title="Excluir" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $property->id }}">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Edit Modal -->
+                        <div class="modal fade" id="modalEditarImovel{{$property->id}}" tabindex="-1" aria-labelledby="modalEditarImovelLabel{{$property->id}}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form method="POST" action="{{ route('dashboard.update', $property->id) }}" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalEditarImovelLabel{{$property->id}}">Editar Imóvel</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="titulo{{$property->id}}" class="form-label">Título</label>
+                                                <input type="text" class="form-control" id="titulo{{$property->id}}" name="title" value="{{ $property->title }}" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="descricao{{$property->id}}" class="form-label">Descrição</label>
+                                                <textarea class="form-control" id="descricao{{$property->id}}" name="description" rows="3" required>{{ $property->description }}</textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="endereco{{$property->id}}" class="form-label">Endereço</label>
+                                                <input type="text" class="form-control" id="endereco{{$property->id}}" name="address" value="{{ $property->address }}" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="precoCompra{{$property->id}}" class="form-label">Preço de Compra</label>
+                                                <input type="number" class="form-control" id="precoCompra{{$property->id}}" name="buyPrice" value="{{ $property->buyPrice }}" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="precoAluguel{{$property->id}}" class="form-label">Preço de Aluguel</label>
+                                                <input type="number" class="form-control" id="precoAluguel{{$property->id}}" name="rentPrice" value="{{ $property->rentPrice }}">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="imagem{{$property->id}}" class="form-label">Imagem do Imóvel</label>
+                                                <input type="file" class="form-control" id="imagem{{$property->id}}" name="image" accept="image/*">
+                                                @if($property->image)
+                                                    <img src="{{ asset('storage/' . $property->image) }}" alt="Imagem atual" class="img-thumbnail mt-2" style="max-width: 150px;">
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-primary">Salvar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Delete Modal -->
+                        <div class="modal fade" id="deleteModal-{{ $property->id }}" tabindex="-1" aria-labelledby="deleteModalLabel-{{ $property->id }}" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <form method="POST" action="{{ route('dashboard.destroy', $property->id) }}">
+                                              @csrf
+                @method('DELETE')  
+                              <div class="modal-header">
+                                  <h5 class="modal-title" id="deleteModalLabel-{{ $property->id }}">Excluir Imóvel</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  Tem certeza que deseja excluir o imóvel <strong>{{ $property->title }}</strong>?
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                  <button type="submit" class="btn btn-danger">Excluir</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
                     @endforeach
                 </div>
             </div>
-            <!-- Bootstrap Icons CDN -->
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-            
+        </div>
 
         <!-- Histórico de Transações -->
         <div class="card">
@@ -105,5 +176,6 @@
         </div>
 
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
