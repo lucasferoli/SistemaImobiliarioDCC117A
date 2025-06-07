@@ -36,46 +36,51 @@
       <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
-        <form method="POST" action="{{ route('profile.update') }}">
-          @csrf
-          @method('PUT')
-          <div class="modal-header">
-            <h5 class="modal-title" id="editProfileModalLabel">Editar Perfil</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-          </div>
-          <div class="modal-body">
-            <div class="mb-3">
-          <label for="name" class="form-label">Nome</label>
-          <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}" required>
-            </div>
-            <div class="mb-3">
-          <label for="email" class="form-label">E-mail</label>
-          <input type="email" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}" required>
-            </div>
-            <!-- Add more fields as needed -->
-            <div class="mb-3">
-              <button type="button" class="btn btn-warning" id="showChangePassword">Alterar senha?</button>
-            </div>
-            <div id="changePasswordFields" style="display:none;">
-          <div class="mb-3">
-            <label for="current_password" class="form-label">Senha atual</label>
-            <input type="password" class="form-control" id="current_password" name="current_password"  >
-          </div>
-          <div class="mb-3">
-            <label for="new_password" class="form-label">Nova senha</label>
-            <input type="password" class="form-control" id="new_password" name="new_password">
-          </div>
-          <div class="mb-3">
-            <label for="new_password_confirmation" class="form-label">Confirme a nova senha</label>
-            <input type="password" class="form-control" id="new_password_confirmation" name="new_password_confirmation">
-          </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-          </div>
-        </form>
+            <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
+              @csrf
+              @method('PUT')
+              <div class="modal-header">
+                <h5 class="modal-title" id="editProfileModalLabel">Editar Perfil</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Nome</label>
+                  <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}" required>
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">E-mail</label>
+                  <input type="email" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}" required>
+                </div>
+                <div class="mb-3 text-center">
+                  <label class="form-label mb-1">Imagem Atual</label><br>
+                  <img src="{{ asset(Auth::user()->image) }}" alt="Foto do Usuário" class="rounded-circle mb-2" style="height: 96px; width: 96px; object-fit: cover; border: 2px solid #dee2e6;">
+                </div>
+                <div class="mb-3">
+                  <label for="imagem" class="form-label">Trocar Imagem de Perfil</label>
+                  <input type="file" class="form-control" id="imagem" name="imagem" accept="image/*">
+                </div>
+                <button type="button" class="btn btn-warning" id="showChangePassword">Alterar senha?</button>
+                <div id="changePasswordFields" style="display:none;">
+                  <div class="mb-3">
+                    <label for="current_password" class="form-label">Senha atual</label>
+                    <input type="password" class="form-control" id="current_password" name="current_password">
+                  </div>
+                  <div class="mb-3">
+                    <label for="new_password" class="form-label">Nova senha</label>
+                    <input type="password" class="form-control" id="new_password" name="new_password">
+                  </div>
+                  <div class="mb-3">
+                    <label for="new_password_confirmation" class="form-label">Confirme a nova senha</label>
+                    <input type="password" class="form-control" id="new_password_confirmation" name="new_password_confirmation">
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
