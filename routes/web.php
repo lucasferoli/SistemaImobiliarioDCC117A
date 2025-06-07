@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\IndividualController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserDashboardController;
 
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\User;
@@ -26,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('/profile');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('/dashboardUser');
 });
 
 Route::middleware(Admin::class)->group(function () {
