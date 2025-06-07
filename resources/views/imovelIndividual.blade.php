@@ -10,10 +10,10 @@
 @include('modais.navbar')
 
 <div class="container mt-5">
-    <div class="card mx-auto" style="max-width: 600px;">
-        @if(isset($property->image) && filter_var($property->image, FILTER_VALIDATE_URL))
-            <img src="{{ $property->image }}" class="card-img-top" alt="Imagem do Imóvel">
-        @endif
+    <div class="card mx-auto" style="max-width: 700px;">
+        <div class="d-flex justify-content-center align-items-center pt-3" style="height: 350px; overflow: hidden;">
+            <img src="{{ asset($property->image) }}" class="card-img-top" alt="Imagem do Imóvel" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+        </div>
         <div class="card-body">
             <h3 class="card-title">{{ $property->title ?? 'Título não disponível' }}</h3>
             <p class="card-text">{{ $property->description ?? 'Descrição não disponível' }}</p>
@@ -27,9 +27,15 @@
             <li class="list-group-item"><strong>Criado em:</strong> {{ isset($property->created_at) ? $property->created_at->format('d/m/Y') : '-' }}</li>
             </ul>
             <div class="d-flex gap-2">
-                <!-- Botões que abrem os modais -->
-                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#buyModal">Comprar</button>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rentModal">Alugar</button>
+                @if(Auth::check())
+                    <!-- Botões que abrem os modais -->
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#buyModal">Comprar</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rentModal">Alugar</button>
+                @else
+                    <!-- Botões que redirecionam para login -->
+                    <a href="{{ route('login') }}" class="btn btn-success">Comprar</a>
+                    <a href="{{ route('login') }}" class="btn btn-primary">Alugar</a>
+                @endif
             </div>
         </div>
     </div>

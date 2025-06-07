@@ -25,18 +25,16 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
             @foreach($properties as $property)
             <div class="col">
-                <div class="card h-100">
-                    @if(isset($property->image) && filter_var($property->image, FILTER_VALIDATE_URL))
-                        <img src="{{ $property->image }}" class="card-img-top" alt="Imagem do Imóvel">
-                    @else
-                        <img src="{{ $property->imagem_url ?? 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80' }}" class="card-img-top" alt="{{ $property->titulo ?? 'Imóvel' }}">
-                    @endif
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $property->title }}</h5>
+                <div class="card h-100 d-flex flex-column">
+                    <div class="d-flex justify-content-center align-items-center pt-3" style="height: 200px; overflow: hidden;">
+                        <img src="{{ $property->image }}" class="card-img-top" alt="Imagem do Imóvel" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-center">{{ $property->title }}</h5>
                         <p class="card-text mb-1"><strong>Endereço:</strong> {{ $property->address }}</p>
                         <p class="card-text mb-1"><strong>Preço de Compra:</strong> R$ {{ number_format($property->buyPrice, 2, ',', '.') }}</p>
                         <p class="card-text mb-3"><strong>Preço de Aluguel:</strong> R$ {{ number_format($property->rentPrice, 2, ',', '.') }}</p>
-                        <a href="{{ route('properties.show', $property->id) }}" class="btn btn-primary">Ver detalhes</a>
+                        <a href="{{ route('properties.show', $property->id) }}" class="btn btn-primary mt-auto">Ver detalhes</a>
                     </div>
                 </div>
             </div>

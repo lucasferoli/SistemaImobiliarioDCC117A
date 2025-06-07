@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/dashboard/create', [UserDashboardController::class, 'store'])->name('dashboard.store');
     Route::put('/dashboard/{property}', [UserDashboardController::class, 'update'])->name('dashboard.update');
     Route::delete('/dashboard/{property}', [UserDashboardController::class, 'destroy'])->name('dashboard.destroy');
+
+    
 });
 
 Route::middleware(Admin::class)->group(function () {
