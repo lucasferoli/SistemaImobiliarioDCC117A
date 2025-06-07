@@ -9,6 +9,10 @@ class UserDashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboardUser');
+        $user = auth()->user();
+
+        $properties = \App\Models\Property::where('user_id', $user->id)->get();
+
+        return view('dashboardUser', compact('properties'));
     }
 }
