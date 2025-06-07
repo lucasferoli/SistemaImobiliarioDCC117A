@@ -18,6 +18,8 @@ class UserDashboardController extends Controller
 
     public function store(Request $request)
     {
+        $user = auth()->user();
+        
         Property::create([
             'title'       => $request->title,
             'description' => $request->description,
@@ -25,7 +27,7 @@ class UserDashboardController extends Controller
             'buyPrice'    => $request->buyPrice,
             'rentPrice'   => $request->rentPrice,
             'image'       => $request->image,
-            'user_id'     => 1,
+            'user_id'     => $user->id,
         ]);
 
         return redirect()->route('/dashboardUser');

@@ -16,11 +16,59 @@
 
         <!-- Imóveis Anunciados -->
         <div class="card mb-5">
-            <div class="card-header bg-primary text-white">
-                <h4 class="mb-0">Meus Imóveis</h4>
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">Meus Imóveis</h4>
+            <!-- Botão para Anunciar Novo Imóvel -->
+            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalNovoImovel">
+                <i class="bi bi-plus-circle"></i> Anunciar Novo Imóvel
+            </button>
             </div>
             <div class="card-body">
-                <div class="row g-4">
+            <div class="row g-4">
+            <!-- Modal Novo Imóvel -->
+            <div class="modal fade" id="modalNovoImovel" tabindex="-1" aria-labelledby="modalNovoImovelLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form method="POST" action="{{ route('dashboard.store') }}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalNovoImovelLabel">Adicionar Novo Imóvel</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="titulo" class="form-label">Título</label>
+                                    <input type="text" class="form-control" id="titulo" name="title" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="descricao" class="form-label">Descrição</label>
+                                    <textarea class="form-control" id="descricao" name="description" rows="3" required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="endereco" class="form-label">Endereço</label>
+                                    <input type="text" class="form-control" id="endereco" name="address" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="precoCompra" class="form-label">Preço de Compra</label>
+                                    <input type="number" class="form-control" id="precoCompra" name="buyPrice" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="precoAluguel" class="form-label">Preço de Aluguel</label>
+                                    <input type="number" class="form-control" id="precoAluguel" name="rentPrice">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="imagem" class="form-label">Imagem do Imóvel</label>
+                                    <input type="file" class="form-control" id="imagem" name="image" accept="image/*">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-success">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
                     @foreach($properties as $property)
                         <div class="col-md-4">
                             <div class="card h-100">
@@ -49,6 +97,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <!-- Edit Modal -->
                         <div class="modal fade" id="modalEditarImovel{{$property->id}}" tabindex="-1" aria-labelledby="modalEditarImovelLabel{{$property->id}}" aria-hidden="true">
                             <div class="modal-dialog">
@@ -100,25 +149,25 @@
 
                         <!-- Delete Modal -->
                         <div class="modal fade" id="deleteModal-{{ $property->id }}" tabindex="-1" aria-labelledby="deleteModalLabel-{{ $property->id }}" aria-hidden="true">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <form method="POST" action="{{ route('dashboard.destroy', $property->id) }}">
-                                              @csrf
-                @method('DELETE')  
-                              <div class="modal-header">
-                                  <h5 class="modal-title" id="deleteModalLabel-{{ $property->id }}">Excluir Imóvel</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form method="POST" action="{{ route('dashboard.destroy', $property->id) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel-{{ $property->id }}">Excluir Imóvel</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Tem certeza que deseja excluir o imóvel <strong>{{ $property->title }}</strong>?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-danger">Excluir</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="modal-body">
-                                  Tem certeza que deseja excluir o imóvel <strong>{{ $property->title }}</strong>?
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                  <button type="submit" class="btn btn-danger">Excluir</button>
-                                </div>
-                              </form>
                             </div>
-                          </div>
                         </div>
                     @endforeach
                 </div>
