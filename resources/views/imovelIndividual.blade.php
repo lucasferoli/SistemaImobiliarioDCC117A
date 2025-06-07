@@ -28,9 +28,15 @@
             </ul>
             <div class="d-flex gap-2">
                 @if(Auth::check())
-                    <!-- Botões que abrem os modais -->
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#buyModal">Comprar</button>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rentModal">Alugar</button>
+                    @if(Auth::id() === $property->user_id)
+                        <a href="{{ url('/dashboard') }}" class="btn btn-warning w-100">
+                            Este imóvel é seu, Edite ele ou Delete o anúncio na sua dashboard
+                        </a>
+                    @else
+                        <!-- Botões que abrem os modais -->
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#buyModal">Comprar</button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rentModal">Alugar</button>
+                    @endif
                 @else
                     <!-- Botões que redirecionam para login -->
                     <a href="{{ route('login') }}" class="btn btn-success">Comprar</a>

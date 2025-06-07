@@ -22,6 +22,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/', [LandingController::class, 'index'])->name('/');
 Route::get('postIndividual/{id}', [IndividualController::class, 'index'])->name('properties.show');
+Route::get('/imobifacil', function () {
+    return view('quemSomos');
+})->name('/quemSomos');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('/profile');
