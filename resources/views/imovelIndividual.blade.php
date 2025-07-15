@@ -30,7 +30,7 @@
                 @if(Auth::check())
                     @if(Auth::id() === $property->user_id)
                         <a href="{{ url('/dashboard') }}" class="btn btn-warning w-100">
-                            Este imóvel é seu, Edite ele ou Delete o anúncio na sua dashboard
+                            Este imóvel já é seu, Edite ele ou Delete o anúncio na sua dashboard
                         </a>
                     @else
                         <!-- Botões que abrem os modais -->
@@ -39,8 +39,7 @@
                     @endif
                 @else
                     <!-- Botões que redirecionam para login -->
-                    <a href="{{ route('login') }}" class="btn btn-success">Comprar</a>
-                    <a href="{{ route('login') }}" class="btn btn-primary">Alugar</a>
+                    <a href="{{ route('login') }}" class="btn btn-primary">Você só pode Comprar ou Alugar um Imovel estando Logado. </a>
                 @endif
             </div>
         </div>
@@ -85,20 +84,6 @@
     </div>
 </div>
 
-<!-- Modal de Loading -->
-<div class="modal fade" id="loadingModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content text-center border-0 shadow-none" style="background: transparent;">
-            <div class="modal-body p-0">
-                <div class="bg-white rounded p-4 d-inline-block">
-                    <img src="{{ asset('assets/patoLoading.gif') }}" alt="Carregando..." style="width:240px;">
-                    <div class="mt-2">Processando...</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Modal de Sucesso -->
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -121,30 +106,21 @@
 document.addEventListener('DOMContentLoaded', function () {
         var buyModal = new bootstrap.Modal(document.getElementById('buyModal'));
         var rentModal = new bootstrap.Modal(document.getElementById('rentModal'));
-        var loadingModal = new bootstrap.Modal(document.getElementById('loadingModal'));
         var successModal = new bootstrap.Modal(document.getElementById('successModal'));
 
         document.getElementById('confirmBuyBtn').addEventListener('click', function () {
                 buyModal.hide();
                 setTimeout(function () {
-                        loadingModal.show();
-                        setTimeout(function () {
-                                loadingModal.hide();
-                                document.getElementById('successModalBody').innerHTML = 'Imóvel comprado com sucesso!';
-                                successModal.show();
-                        }, 4000);
+                        document.getElementById('successModalBody').innerHTML = 'Imóvel comprado com sucesso!';
+                        successModal.show();
                 }, 500);
         });
 
         document.getElementById('confirmRentBtn').addEventListener('click', function () {
                 rentModal.hide();
                 setTimeout(function () {
-                        loadingModal.show();
-                        setTimeout(function () {
-                                loadingModal.hide();
-                                document.getElementById('successModalBody').innerHTML = 'Imóvel alugado com sucesso!';
-                                successModal.show();
-                        }, 4000);
+                        document.getElementById('successModalBody').innerHTML = 'Imóvel alugado com sucesso!';
+                        successModal.show();
                 }, 500);
         });
 });

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->decimal('buyPrice', 15, 2);
             $table->decimal('rentPrice', 15, 2);
+            $table->enum('status', ['available', 'sold', 'rented'])->default('available');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
