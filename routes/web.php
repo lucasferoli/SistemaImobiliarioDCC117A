@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/dashboard/{property}', [UserDashboardController::class, 'update'])->name('dashboard.update');
     Route::delete('/dashboard/{property}', [UserDashboardController::class, 'destroy'])->name('dashboard.destroy');
 
+    Route::post('postIndividual/{id}', [IndividualController::class, 'store'])->name('individual.store');
     
 });
 

@@ -47,23 +47,29 @@
 </div>
 
 <!-- Modal de Confirmação de Compra -->
-<div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="buyModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="buyModalLabel">Confirmar Compra</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-            </div>
-            <div class="modal-body">
-                Tem certeza que deseja comprar este imóvel por <strong>R$ {{ number_format($property->buyPrice ?? 0, 2, ',', '.') }}</strong>?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-success" id="confirmBuyBtn">Confirmar Compra</button>
+<form method="POST" action="{{ route('individual.store', ['id' => $property->id]) }}">
+    @csrf
+    <div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="buyModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="buyModalLabel">Confirmar Compra</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza que deseja comprar este imóvel por 
+                    <strong>R$ {{ number_format($property->buyPrice ?? 0, 2, ',', '.') }}</strong>?
+                    <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                    <input type="hidden" name="totalPrice" value="{{ $property->buyPrice }}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success" id="confirmBuyBtn">Confirmar Compra</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 
 <!-- Modal de Confirmação de Aluguel -->
 <div class="modal fade" id="rentModal" tabindex="-1" aria-labelledby="rentModalLabel" aria-hidden="true">
