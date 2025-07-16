@@ -28,7 +28,7 @@
             </ul>
             <div class="d-flex gap-2">
                 @if($property->status === 'sold' || $property->status === 'rented')
-                    <a href="{{ url('/dashboard') }}" class="btn btn-secondary w-100">
+                    <a href="{{ url('/') }}" class="btn btn-secondary w-100">
                         Propriedade está Indisponível
                     </a>
                 @else

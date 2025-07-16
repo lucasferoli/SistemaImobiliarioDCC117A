@@ -24,25 +24,24 @@
         <h2 class="mb-4 text-primary">Destaques</h2>
         <div class="row row-cols-1 row-cols-md-3 g-4">
             @foreach($properties as $property)
-            <div class="col">
-                <div class="card h-100 d-flex flex-column">
-                    <div class="d-flex justify-content-center align-items-center pt-3" style="height: 200px; overflow: hidden;">
-                        <img src="{{ $property->image }}" class="card-img-top" alt="Imagem do Imóvel" style="max-height: 100%; max-width: 100%; object-fit: contain;">
-                    </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-center">{{ $property->title }}</h5>
-                        <p class="card-text mb-1"><strong>Endereço:</strong> {{ $property->address }}</p>
-                        <p class="card-text mb-1"><strong>Preço de Compra:</strong> R$ {{ number_format($property->buyPrice, 2, ',', '.') }}</p>
-                        <p class="card-text mb-3"><strong>Preço de Aluguel:</strong> R$ {{ number_format($property->rentPrice, 2, ',', '.') }}</p>
-                        <a href="{{ route('properties.show', $property->id) }}" class="btn btn-primary mt-auto">Ver detalhes</a>
+                @if($property->status !== 'sold' && $property->status !== 'rented' && Auth::id() !== $property->user_id)
+
+                <div class="col">
+                    <div class="card h-100 d-flex flex-column">
+                        <div class="d-flex justify-content-center align-items-center pt-3" style="height: 200px; overflow: hidden;">
+                            <img src="{{ $property->image }}" class="card-img-top" alt="Imagem do Imóvel" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-center">{{ $property->title }}</h5>
+                            <p class="card-text mb-1"><strong>Endereço:</strong> {{ $property->address }}</p>
+                            <p class="card-text mb-1"><strong>Preço de Compra:</strong> R$ {{ number_format($property->buyPrice, 2, ',', '.') }}</p>
+                            <p class="card-text mb-3"><strong>Preço de Aluguel:</strong> R$ {{ number_format($property->rentPrice, 2, ',', '.') }}</p>
+                            <a href="{{ route('properties.show', $property->id) }}" class="btn btn-primary mt-auto">Ver detalhes</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+                @endif
             @endforeach
-
-        </div>
-        <div class="text-center mt-5">
-            <a href="#" class="btn btn-outline-primary btn-lg">Ver todos os imóveis</a>
         </div>
     </main>
 
