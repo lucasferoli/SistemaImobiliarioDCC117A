@@ -24,6 +24,9 @@ class IndividualController extends Controller
             'totalPrice' => $request->totalPrice,
         ]);
 
+        $status = $request->input('status');
+        Property::where('id', $id)->update(['status' => $status]);
+
         return redirect()->to("postIndividual/{$id}");
     }
 }
