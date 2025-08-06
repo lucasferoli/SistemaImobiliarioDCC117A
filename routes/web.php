@@ -9,6 +9,7 @@ use App\Http\Controllers\IndividualController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserDashboardController;
+use App\Http\Controllers\AdminController;
 
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\User;
@@ -42,9 +43,17 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(Admin::class)->group(function () {
     Route::prefix('admin')->group(function () {
+
         Route::get('/dashboard', function () {
             return view('admin.dashboard');
         })->name('admin.dashboard');
+
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::post('/dashboard/create', [AdminController::class, 'store'])->name('dashboard.store');
+    Route::put('/dashboard/{property}', [AdminController::class, 'update'])->name('dashboard.update');
+    Route::delete('/dashboard/{property}', [AdminController::class, 'destroy'])->name('dashboard.destroy');
+
+
 
         Route::get('/imoveisCrud', [PropertyController::class, 'index'])->name('admin.imoveisCrud');
         Route::post('/imoveisCrud/create', [PropertyController::class, 'store'])->name('properties.store');
