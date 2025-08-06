@@ -18,7 +18,7 @@
                 <th>ID</th>
                 <th>Título</th>
                 <th>Endereço</th>
-                <th>Preço</th>
+                <th>Preço de Compra</th>
                 <th>Ações</th>
             </tr>
         </thead>

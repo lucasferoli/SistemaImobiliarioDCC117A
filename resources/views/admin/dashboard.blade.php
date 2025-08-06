@@ -17,8 +17,8 @@ $adminsCount = User::where('role', 'admin')->count();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 </head>
-<body>
 
+<body>
 <?php include resource_path('views/admin/modals/header.php'); ?>
 
 <div class="container my-5">
@@ -60,51 +60,9 @@ $adminsCount = User::where('role', 'admin')->count();
                 <i class="bi bi-plus-circle"></i> Anunciar Novo Imóvel
             </button>
         </div>
-        <div class="card-body">
-            <div class="row g-4">
-                <div class="modal fade" id="modalNovoImovel" tabindex="-1" aria-labelledby="modalNovoImovelLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <form method="POST" action="{{ route('dashboard.store') }}" enctype="multipart/form-data">
-                                @csrf
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalNovoImovelLabel">Adicionar Novo Imóvel</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="mb-3">
-                                        <label for="titulo" class="form-label">Título</label>
-                                        <input type="text" class="form-control" id="titulo" name="title" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="descricao" class="form-label">Descrição</label>
-                                        <textarea class="form-control" id="descricao" name="description" rows="3" required></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="endereco" class="form-label">Endereço</label>
-                                        <input type="text" class="form-control" id="endereco" name="address" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="precoCompra" class="form-label">Preço de Compra</label>
-                                        <input type="number" class="form-control" id="precoCompra" name="buyPrice" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="precoAluguel" class="form-label">Preço de Aluguel</label>
-                                        <input type="number" class="form-control" id="precoAluguel" name="rentPrice">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="imagem" class="form-label">Imagem do Imóvel</label>
-                                        <input type="file" class="form-control" id="imagem" name="image" accept="image/*">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-success">Salvar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+
+        @include('admin.modals.propriedades.criar')
+        
                 @foreach($properties->where('user_id', auth()->id()) as $property)
                 <div class="col-md-4">
                     <div class="card h-100">
@@ -202,3 +160,5 @@ $adminsCount = User::where('role', 'admin')->count();
                     </div>
                 </div>
                 @endforeach
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>

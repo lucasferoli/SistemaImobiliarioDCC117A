@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('/dashboardUser');
-    Route::post('/dashboard/create', [UserDashboardController::class, 'store'])->name('dashboard.store');
+    Route::post('/dashboard', [UserDashboardController::class, 'store'])->name('dashboard.store');
     Route::put('/dashboard/{property}', [UserDashboardController::class, 'update'])->name('dashboard.update');
     Route::delete('/dashboard/{property}', [UserDashboardController::class, 'destroy'])->name('dashboard.destroy');
 
@@ -49,7 +49,7 @@ Route::middleware(Admin::class)->group(function () {
         })->name('admin.dashboard');
 
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::post('/dashboard/create', [AdminController::class, 'store'])->name('dashboard.store');
+    Route::post('/dashboard', [AdminController::class, 'store'])->name('dashboard.store');
     Route::put('/dashboard/{property}', [AdminController::class, 'update'])->name('dashboard.update');
     Route::delete('/dashboard/{property}', [AdminController::class, 'destroy'])->name('dashboard.destroy');
 
