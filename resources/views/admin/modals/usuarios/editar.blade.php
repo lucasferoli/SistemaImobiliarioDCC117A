@@ -1,4 +1,5 @@
-<div class="modal fade" id="modalEditarUsuario{{$user->id}}" tabindex="-1" aria-labelledby="modalEditarUsuarioLabel{{$user->id}}" aria-hidden="true">
+<div class="modal fade" id="modalEditarUsuario{{$user->id}}" tabindex="-1"
+    aria-labelledby="modalEditarUsuarioLabel{{$user->id}}" aria-hidden="true">
     <div class="modal-dialog">
         <form method="POST" action="{{ route('users.update', $user->id) }}" enctype="multipart/form-data">
             @csrf
@@ -11,11 +12,13 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="name{{$user->id}}" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="name{{$user->id}}" name="name" value="{{$user->name}}" required>
+                        <input type="text" class="form-control" id="name{{$user->id}}" name="name"
+                            value="{{$user->name}}" required>
                     </div>
                     <div class="mb-3">
                         <label for="email{{$user->id}}" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email{{$user->id}}" name="email" value="{{$user->email}}" required>
+                        <input type="email" class="form-control" id="email{{$user->id}}" name="email"
+                            value="{{$user->email}}" required>
                     </div>
                     <div class="mb-3">
                         <label for="type{{$user->id}}" class="form-label">Tipo</label>
@@ -26,15 +29,18 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Foto de Perfil Atual</label><br>
-                        @if($user->profile_image)
-                            <img src="{{ asset('storage/' . $user->profile_image) }}" alt="Foto de Perfil" class="img-thumbnail mb-2" style="max-width: 120px;">
+                        @if($user->image)
+                        <img src="/{{ $user->image }}" alt="Foto de Perfil"
+                            class="img-thumbnail mb-2" style="max-width: 120px;">
                         @else
-                            <img src="{{ asset('images/default-profile.png') }}" alt="Foto de Perfil Padrão" class="img-thumbnail mb-2" style="max-width: 120px;">
+                        <img src="{{ asset('assets/profileImage.png') }}" alt="Foto de Perfil Padrão"
+                            class="img-thumbnail mb-2" style="max-width: 120px;">
                         @endif
                     </div>
                     <div class="mb-3">
                         <label for="profile_image{{$user->id}}" class="form-label">Alterar Foto de Perfil</label>
-                        <input type="file" class="form-control" id="profile_image{{$user->id}}" name="profile_image" accept="image/*">
+                        <input type="file" class="form-control" id="profile_image{{$user->id}}" name="profile_image"
+                            accept="image/*">
                         <small class="form-text text-muted">Se não selecionar, a imagem atual será mantida.</small>
                     </div>
                 </div>

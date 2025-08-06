@@ -48,8 +48,7 @@
         </table>
     </div>
     <!-- Modal Adicionar Usuário -->
-
-    <?php require resource_path('views/admin/modals/usuarios/criar.blade.php'); ?>
+    @include('admin.modals.usuarios.criar')
 
 @foreach($users as $user)
 
