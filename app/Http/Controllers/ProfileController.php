@@ -21,15 +21,19 @@ class ProfileController extends Controller
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'current_password' => 'nullable|required_with:new_password|string',
             'new_password' => 'nullable|string|min:8|confirmed',
-            'imagem' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $user->name = $validated['name'];
         $user->email = $validated['email'];
 
         // Handle image upload
-        if ($request->hasFile('imagem')) {
-            $image = $request->file('imagem');
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($user->image && file_exists(public_path($user->image))) {
+                unlink(public_path($user->image));
+            }
+            $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->move(public_path('assets/profileImage'), $imageName);
             $user->image = 'assets/profileImage/' . $imageName;
