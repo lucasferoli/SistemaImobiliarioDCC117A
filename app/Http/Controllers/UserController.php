@@ -22,7 +22,6 @@ class UserController extends Controller
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->move(public_path('assets/profileImage'), $imageName);
-            // Save relative path
             $imagePath = 'assets/profileImage/' . $imageName;
         }
 
@@ -37,27 +36,33 @@ class UserController extends Controller
         return redirect()->route('admin.usuariosCrud');
     }
 
-public function update(User $user, Request $request)
-{
-    $data = $request->all();
-    if ($request->hasFile('image')) {
-        $image = $request->file('image');
-        $imageName = time() . '_' . $image->getClientOriginalName();
-        $image->move(public_path('assets/profileImage'), $imageName);
-        $data['image'] = $imageName;
+    public function update(User $user, Request $request)
+    {
+        $data = $request->all();
+
+        if ($request->hasFile('image')) {
+            if ($user->image && file_exists(public_path($user->image))) {
+                unlink(public_path($user->image));
+            }
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('assets/profileImage'), $imageName);
+            $data['image'] = 'assets/profileImage/' . $imageName;
+        }
+
+        $user->update($data);
+
+        return redirect()->route('admin.usuariosCrud');
     }
-
-    $user->update($data);
-
-    return redirect()->route('admin.usuariosCrud');
-}
-
 
     public function destroy(User $user)
     {
+        if ($user->image && file_exists(public_path($user->image))) {
+            unlink(public_path($user->image));
+        }
+
         $user->delete();
-        
+
         return redirect()->route('admin.usuariosCrud');
     }
 }
-
