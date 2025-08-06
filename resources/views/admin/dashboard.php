@@ -1,3 +1,13 @@
+<?php
+
+use App\Models\User;
+use App\Models\Property;
+
+$imoveisCount = Property::count();
+$clientesCount = User::where('role', 'user')->count();
+$adminsCount = User::where('role', 'admin')->count();
+?>
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -18,8 +28,8 @@
             <div class="card text-bg-primary">
                 <div class="card-body">
                     <h5 class="card-title">Imóveis</h5>
-                    <p class="card-text fs-3">120</p>
-                    <a href="#" class="btn btn-light btn-sm">Gerenciar</a>
+                    <p class="card-text fs-3"><?= $imoveisCount ?></p>
+                    <a href="/admin/imoveisCrud" class="btn btn-light btn-sm">Gerenciar</a>
                 </div>
             </div>
         </div>
@@ -27,68 +37,24 @@
             <div class="card text-bg-success">
                 <div class="card-body">
                     <h5 class="card-title">Clientes</h5>
-                    <p class="card-text fs-3">80</p>
-                    <a href="#" class="btn btn-light btn-sm">Gerenciar</a>
+                    <p class="card-text fs-3"><?= $clientesCount ?></p>
+                    <a href="/admin/usuariosCrud" class="btn btn-light btn-sm">Gerenciar</a>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="card text-bg-warning">
                 <div class="card-body">
-                    <h5 class="card-title">Usuários</h5>
-                    <p class="card-text fs-3">5</p>
-                    <a href="#" class="btn btn-light btn-sm">Gerenciar</a>
+                    <h5 class="card-title">Administradores</h5>
+                    <p class="card-text fs-3"><?= $adminsCount ?></p>
+                    <a href="/admin/usuariosCrud" class="btn btn-light btn-sm">Gerenciar</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card text-bg-danger">
-                <div class="card-body">
-                    <h5 class="card-title">Visitas Agendadas</h5>
-                    <p class="card-text fs-3">15</p>
-                    <a href="#" class="btn btn-light btn-sm">Ver</a>
-                </div>
-            </div>
-        </div>
+        <!-- Removido o card de Visitas Agendadas -->
     </div>
 
-    <div class="mt-5">
-        <h2>Últimos Imóveis Cadastrados</h2>
-        <table class="table table-striped mt-3">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Título</th>
-                    <th>Tipo</th>
-                    <th>Preço</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>101</td>
-                    <td>Apartamento Centro</td>
-                    <td>Apartamento</td>
-                    <td>R$ 350.000</td>
-                    <td>
-                        <a href="#" class="btn btn-primary btn-sm">Editar</a>
-                        <a href="#" class="btn btn-danger btn-sm">Excluir</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>102</td>
-                    <td>Casa Jardim</td>
-                    <td>Casa</td>
-                    <td>R$ 500.000</td>
-                    <td>
-                        <a href="#" class="btn btn-primary btn-sm">Editar</a>
-                        <a href="#" class="btn btn-danger btn-sm">Excluir</a>
-                    </td>
-                </tr>
-                <!-- Adicione mais linhas conforme necessário -->
-            </tbody>
-        </table>
-    </div>
+    <!-- ... resto do código ... -->
 </div>
 
 <!-- Bootstrap JS -->
