@@ -32,7 +32,7 @@
                     <input type="hidden" name="status" value="Disponível">
                     <div class="mb-3">
                         <label for="imagem" class="form-label">Imagem do Imóvel</label>
-                        <input type="file" class="form-control" id="imagem" name="imagem" accept="image/*">
+                        <input type="file" class="form-control" id="imagem" name="image" accept="image/*">
                     </div>
                 </div>
                 <div class="modal-footer">
