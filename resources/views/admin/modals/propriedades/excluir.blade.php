@@ -1,12 +1,13 @@
-<div class="modal fade" id="modalExcluirImovel{{$property->id}}" tabindex="-1" aria-labelledby="modalExcluirImovelLabel{{$property->id}}" aria-hidden="true">
+<div class="modal fade" id="deleteModal-{{ $property->id }}" tabindex="-1"
+    aria-labelledby="deleteModalLabel-{{ $property->id }}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="POST" action="#">
+            <form method="POST" action="{{ route('dashboard.destroy', $property->id) }}">
                 @csrf
                 @method('DELETE')
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalExcluirImovelLabel{{$property->id}}">Excluir Imóvel</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    <h5 class="modal-title" id="deleteModalLabel-{{ $property->id }}">Excluir Imóvel</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     Tem certeza que deseja excluir o imóvel <strong>{{ $property->title }}</strong>?
