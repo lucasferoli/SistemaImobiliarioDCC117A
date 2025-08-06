@@ -12,9 +12,6 @@
 
 <div class="container my-5">
     <h1 class="mb-4">Gerenciamento de Imóveis</h1>
-    <div class="mb-3">
-        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNovoImovel">Adicionar Novo Imóvel</a>
-    </div>
     <table class="table table-striped">
         <thead>
             <tr>

@@ -108,7 +108,7 @@ $adminsCount = User::where('role', 'admin')->count();
                 @foreach($properties->where('user_id', auth()->id()) as $property)
                 <div class="col-md-4">
                     <div class="card h-100">
-                        <img src="{{ $property->image ? asset('storage/' . $property->image) : 'https://via.placeholder.com/350x200?text=Casa+1' }}" class="card-img-top" alt="{{ $property->title }}">
+                        <img src="/{{ $property->image }}" class="card-img-top" alt="{{ $property->title }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ $property->title }}</h5>
                             <p class="card-text">
