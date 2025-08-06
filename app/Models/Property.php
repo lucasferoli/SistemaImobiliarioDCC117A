@@ -21,6 +21,7 @@ class Property extends Model
         'buyPrice',
         'rentPrice',
         'user_id',
+        'image',
     ];
 
     /**

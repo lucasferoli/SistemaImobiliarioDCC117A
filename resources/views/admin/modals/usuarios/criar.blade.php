@@ -1,6 +1,6 @@
 <div class="modal fade" id="modalAdicionarUsuario" tabindex="-1" aria-labelledby="modalAdicionarUsuarioLabel" aria-hidden="true">
         <div class="modal-dialog">
-                <form method="POST" action="{{ route('users.store') }}" autocomplete="off" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('users.store') }}" autocomplete="on" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-content">
                                 <div class="modal-header">
@@ -29,7 +29,7 @@
                                         </div>
                                         <div class="mb-3">
                                                 <label for="profile_image" class="form-label">Foto de Perfil (opcional)</label>
-                                                <input type="file" class="form-control" id="profile_image" name="profile_image" accept="image/*">
+                                                <input type="file" class="form-control" id="image" name="image" accept="image/*">
                                                 <small class="form-text text-muted">Se não adicionar, será usada a imagem padrão.</small>
                                         </div>
                                 </div>

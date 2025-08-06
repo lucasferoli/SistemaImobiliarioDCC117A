@@ -16,20 +16,22 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $imagePath = null;
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->move(public_path('assets/profileImage'), $imageName);
-        } else {
-            $imageName = null;
+            // Save relative path
+            $imagePath = 'assets/profileImage/' . $imageName;
         }
 
         User::create([
             'name'    => $request->name,
             'email'   => $request->email,
-            'password'=> $request->password,
+            'password'=> bcrypt($request->password),
             'role'    => $request->role,
-            'image' => $imageName,
+            'image'   => $imagePath,
         ]);
 
         return redirect()->route('admin.usuariosCrud');
