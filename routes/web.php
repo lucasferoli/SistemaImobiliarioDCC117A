@@ -32,10 +32,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('/dashboardUser');
-    Route::post('/dashboard', [UserDashboardController::class, 'store'])->name('dashboard.store');
-    Route::put('/dashboard/{property}', [UserDashboardController::class, 'update'])->name('dashboard.update');
-    Route::delete('/dashboard/{property}', [UserDashboardController::class, 'destroy'])->name('dashboard.destroy');
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::post('/dashboard', [AdminController::class, 'store'])->name('dashboard.store');
+    Route::put('/dashboard/{property}', [AdminController::class, 'update'])->name('dashboard.update');
+    Route::delete('/dashboard/{property}', [AdminController::class, 'destroy'])->name('dashboard.destroy');
 
     Route::post('postIndividual/{id}', [IndividualController::class, 'store'])->name('individual.store');
     

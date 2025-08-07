@@ -5,9 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Property;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    private function redirectByRole()
+    {
+        $user = Auth::user();
+        if ($user && $user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        } else {
+            return redirect()->route('dashboard');
+        }
+    }
+
     public function index()
     {
         $properties = Property::all();
@@ -34,7 +45,7 @@ class AdminController extends Controller
             'user_id'     => $request->user_id,
         ]);
 
-        return redirect()->route('admin.dashboard');
+        return $this->redirectByRole();
     }
 
     public function update(Property $property, Request $request)
@@ -53,7 +64,7 @@ class AdminController extends Controller
 
         $property->update($data);
 
-        return redirect()->route('admin.dashboard');
+        return $this->redirectByRole();
     }
 
     public function destroy(Property $property)
@@ -64,7 +75,6 @@ class AdminController extends Controller
 
         $property->delete();
 
-        return redirect()->route('admin.dashboard');
+        return $this->redirectByRole();
     }
 }
-
