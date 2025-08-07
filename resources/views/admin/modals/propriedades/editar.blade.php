@@ -39,10 +39,6 @@
                         <label for="imagem{{$property->id}}" class="form-label">Imagem do Imóvel</label>
                         <input type="file" class="form-control" id="imagem{{$property->id}}" name="image"
                             accept="image/*">
-                        @if($property->image)
-                        <img src="{{ asset('storage/' . $property->image) }}" alt="Imagem atual"
-                            class="img-thumbnail mt-2" style="max-width: 150px;">
-                        @endif
                     </div>
                 </div>
                 <div class="modal-footer">

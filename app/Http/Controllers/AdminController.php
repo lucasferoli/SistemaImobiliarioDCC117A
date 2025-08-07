@@ -41,9 +41,7 @@ class AdminController extends Controller
     {
         $data = $request->all();
 
-        // Handle image update
         if ($request->hasFile('image')) {
-            // Delete old image if exists
             if ($property->image && file_exists(public_path($property->image))) {
                 unlink(public_path($property->image));
             }
@@ -60,7 +58,6 @@ class AdminController extends Controller
 
     public function destroy(Property $property)
     {
-        // Delete image file if exists
         if ($property->image && file_exists(public_path($property->image))) {
             unlink(public_path($property->image));
         }
@@ -70,3 +67,4 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard');
     }
 }
+
